@@ -2,16 +2,16 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: #0b1220;
   overflow: hidden;
   cursor: grab;
+  background: #3a8f35;
 }
 
 .wrapper:active {
   cursor: grabbing;
 }
 
-/* ─── World (the large draggable surface) ─── */
+/* ─── World ─── */
 
 .world {
   position: absolute;
@@ -20,267 +20,213 @@
   user-select: none;
 }
 
-/* Deep dark sky / ocean base */
+/* Green lego baseplate — stud grid via CSS */
 .ground {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 3200px 2600px at 2500px 1900px, #1a3d22 0%, #0f2415 40%, #0b1c10 70%, #0b1220 100%);
+  background-color: #4db847;
+  /* Stud: a subtle raised circle per cell */
+  background-image:
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.28) 32%, rgba(0,0,0,0.06) 34%, transparent 50%);
+  background-size: 24px 24px;
 }
 
-/* Beach / top zone — sunset sky strip */
-.beach {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 600px;
-  background: linear-gradient(
-    to bottom,
-    #1a1a4e 0%,
-    #2d1b69 15%,
-    #6b2d6b 30%,
-    #c0546a 45%,
-    #e8874a 60%,
-    #f4b34a 75%,
-    #2a5e2a 90%,
-    #1a3d22 100%
-  );
-  opacity: 0.9;
-}
-
-/* Sun */
-.sun {
-  position: absolute;
-  top: 90px;
-  left: 2340px;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle, #fff7a0 0%, #ffd046 40%, #ff8c42 70%, transparent 100%);
-  border-radius: 50%;
-  box-shadow: 0 0 60px 20px rgba(255, 200, 60, 0.4), 0 0 120px 40px rgba(255, 140, 60, 0.2);
-}
-
-/* ─── Dirt paths ─── */
-
+/* Grey lego stud paths */
 .pathV {
   position: absolute;
-  left: 2340px;
-  top: 400px;
-  width: 56px;
-  height: 2400px;
-  background: #8b6914;
-  border-radius: 28px;
-  opacity: 0.7;
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.4);
+  left: 2330px;
+  top: 0;
+  width: 192px;  /* 8 studs × 24px */
+  height: 100%;
+  background-color: #9e9e9e;
+  background-image:
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
+  background-size: 24px 24px;
+  opacity: 0.55;
 }
 
 .pathH {
   position: absolute;
-  left: 600px;
-  top: 2100px;
-  width: 3400px;
-  height: 56px;
-  background: #8b6914;
-  border-radius: 28px;
-  opacity: 0.7;
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.4);
+  left: 0;
+  top: 2060px;
+  width: 100%;
+  height: 144px; /* 6 studs */
+  background-color: #9e9e9e;
+  background-image:
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
+  background-size: 24px 24px;
+  opacity: 0.55;
 }
 
-/* Branch right to library */
+/* Diagonal branch to library (top-right) */
 .pathBranchLibrary {
   position: absolute;
-  left: 2396px;
-  top: 800px;
-  width: 1200px;
-  height: 40px;
-  background: #8b6914;
-  border-radius: 20px;
-  opacity: 0.6;
-  transform: rotate(-8deg);
+  left: 2522px;
+  top: 780px;
+  width: 1100px;
+  height: 120px;
+  background-color: #9e9e9e;
+  background-image:
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
+  background-size: 24px 24px;
+  opacity: 0.45;
+  transform: rotate(-6deg);
   transform-origin: left center;
+  border-radius: 60px;
 }
 
-/* Branch left to bakery */
+/* Branch to bakery (lower-left) */
 .pathBranchBakery {
   position: absolute;
-  left: 900px;
-  top: 2100px;
-  width: 1500px;
-  height: 40px;
-  background: #8b6914;
-  border-radius: 20px;
-  opacity: 0.6;
-  transform: rotate(12deg);
+  left: 700px;
+  top: 2010px;
+  width: 1640px;
+  height: 120px;
+  background-color: #9e9e9e;
+  background-image:
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
+  background-size: 24px 24px;
+  opacity: 0.45;
+  transform: rotate(10deg);
   transform-origin: right center;
-}
-
-/* Grass texture patches */
-.grassPatch1 {
-  position: absolute;
-  left: 400px;
-  top: 1200px;
-  width: 700px;
-  height: 500px;
-  background: radial-gradient(ellipse, #2a5e2a 0%, transparent 70%);
-  opacity: 0.5;
-  border-radius: 50%;
-}
-
-.grassPatch2 {
-  position: absolute;
-  left: 3200px;
-  top: 1000px;
-  width: 900px;
-  height: 600px;
-  background: radial-gradient(ellipse, #2a5e2a 0%, transparent 70%);
-  opacity: 0.5;
-  border-radius: 50%;
-}
-
-.grassPatch3 {
-  position: absolute;
-  left: 1800px;
-  top: 2400px;
-  width: 1200px;
-  height: 700px;
-  background: radial-gradient(ellipse, #1d4d1d 0%, transparent 70%);
-  opacity: 0.4;
-  border-radius: 50%;
+  border-radius: 60px;
 }
 
 /* ─── Buildings ─── */
+/* Zoom-out: buildings 320-380px wide instead of 420-460px */
 
 .studio {
   position: absolute;
-  left: 1820px;
-  top: 920px;
-  width: 420px;
+  left: 1860px;
+  top: 960px;
+  width: 340px;
   height: auto;
-  image-rendering: auto;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)) brightness(1.1);
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.08);
   transition: filter 0.2s;
 }
-
 .studio:hover {
-  filter: drop-shadow(0 24px 48px rgba(255,200,100,0.4)) brightness(1.2);
+  filter: drop-shadow(0 20px 40px rgba(255,200,100,0.35)) brightness(1.18);
 }
 
 .library {
   position: absolute;
-  left: 3300px;
+  left: 3360px;
   top: 680px;
-  width: 460px;
+  width: 370px;
   height: auto;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)) brightness(1.05);
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.05);
   transition: filter 0.2s;
 }
-
 .library:hover {
-  filter: drop-shadow(0 24px 48px rgba(200,220,255,0.4)) brightness(1.15);
+  filter: drop-shadow(0 20px 40px rgba(200,220,255,0.35)) brightness(1.15);
 }
 
 .bakery {
   position: absolute;
-  left: 540px;
+  left: 560px;
   top: 1700px;
-  width: 400px;
+  width: 320px;
   height: auto;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)) brightness(1.05);
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.05);
   transition: filter 0.2s;
 }
-
 .bakery:hover {
-  filter: drop-shadow(0 24px 48px rgba(255,150,100,0.4)) brightness(1.15);
+  filter: drop-shadow(0 20px 40px rgba(255,150,100,0.35)) brightness(1.15);
 }
 
 .postOffice {
   position: absolute;
-  left: 3200px;
+  left: 3220px;
   top: 1700px;
-  width: 420px;
+  width: 340px;
   height: auto;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)) brightness(1.05);
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.05);
   transition: filter 0.2s;
 }
-
 .postOffice:hover {
-  filter: drop-shadow(0 24px 48px rgba(100,200,150,0.4)) brightness(1.15);
+  filter: drop-shadow(0 20px 40px rgba(100,200,150,0.35)) brightness(1.15);
 }
 
 /* ─── Decorations ─── */
 
 .fountain {
   position: absolute;
-  left: 2240px;
-  top: 1900px;
-  width: 200px;
+  left: 2260px;
+  top: 1920px;
+  width: 170px;
   height: auto;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 12px 24px rgba(100,220,255,0.3)) brightness(1.1);
+  filter: drop-shadow(0 10px 20px rgba(100,220,255,0.25)) brightness(1.08);
 }
 
 .bench {
   position: absolute;
-  left: 2200px;
-  top: 280px;
-  width: 220px;
+  left: 2230px;
+  top: 310px;
+  width: 180px;
   height: auto;
-  /* bench has white bg so we use multiply on a lighter ground area */
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,0.4));
   cursor: pointer;
 }
 
-/* ─── Character ─── */
+/* ─── Trees (white bg: multiply, black bg: screen) ─── */
+
+.treeGreen {
+  mix-blend-mode: multiply;
+  position: absolute;
+  width: 130px;
+  height: auto;
+  pointer-events: none;
+}
+
+.treeAutumn {
+  mix-blend-mode: multiply;
+  position: absolute;
+  width: 120px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Small lego plant pots (black bg: screen) */
+.plant {
+  mix-blend-mode: screen;
+  position: absolute;
+  width: 100px;
+  height: auto;
+  pointer-events: none;
+  filter: brightness(1.1);
+}
+
+/* ─── Character (zoom-out: 160px instead of 200px) ─── */
 
 .character {
   position: absolute;
-  left: 2150px;
-  top: 1360px;
-  width: 200px;
+  left: 2180px;
+  top: 1380px;
+  width: 160px;
   height: auto;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.7)) brightness(1.15);
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.6)) brightness(1.15);
   z-index: 10;
 }
 
-.characterLabel {
-  position: absolute;
-  left: 2165px;
-  top: 1330px;
-  width: 170px;
-  text-align: center;
-  color: rgba(255, 240, 180, 0.85);
-  font-family: 'Courier New', monospace;
-  font-size: 12px;
-  letter-spacing: 1px;
-  pointer-events: none;
-  text-shadow: 0 0 8px rgba(255, 200, 80, 0.6);
-  animation: labelFloat 2s ease-in-out infinite;
-}
-
-@keyframes labelFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-/* ─── UI ─── */
+/* ─── UI chrome ─── */
 
 .hint {
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.75);
   font-family: 'Courier New', monospace;
   font-size: 13px;
   letter-spacing: 2px;
   pointer-events: none;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
   z-index: 300;
 }
 
@@ -289,7 +235,7 @@
   top: 16px;
   right: 16px;
   z-index: 300;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.55);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 6px;
@@ -300,7 +246,4 @@
   letter-spacing: 1px;
   transition: background 0.15s;
 }
-
-.closeBtn:hover {
-  background: rgba(0, 0, 0, 0.85);
-}
+.closeBtn:hover { background: rgba(0,0,0,0.8); }

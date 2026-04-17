@@ -144,31 +144,80 @@ export function VaishnaviIsland({ onClose }: VaishnaviIslandProps) {
         initial={initialOffset}
         style={{ width: WORLD_W, height: WORLD_H }}
       >
-        {/* Ground layers */}
+        {/* Ground — green lego stud baseplate */}
         <div className={styles.ground} />
 
-        {/* Paths */}
+        {/* Grey lego stud paths */}
         <div className={styles.pathV} />
         <div className={styles.pathH} />
         <div className={styles.pathBranchLibrary} />
         <div className={styles.pathBranchBakery} />
 
-        {/* Grass patches */}
-        <div className={styles.grassPatch1} />
-        <div className={styles.grassPatch2} />
-        <div className={styles.grassPatch3} />
+        {/* Trees — green (white bg → multiply) scattered around island */}
+        {([
+          [400,  600], [700,  450], [1100, 320], [1600, 260], [3000, 260],
+          [3700, 380], [4100, 520], [4300, 900], [4400,1500],
+          [4200,2300], [3800,2700], [300, 2800], [200, 2200], [250, 1400],
+          [1200,1900], [1500,2800], [2800,1600], [3100,1300],
+        ] as [number,number][]).map(([x, y], i) => (
+          <img
+            key={`tg-${i}`}
+            src="/assets/tree-green.png"
+            className={styles.treeGreen}
+            style={{ left: x, top: y }}
+            alt=""
+            draggable={false}
+          />
+        ))}
 
-        {/* Beach/top area */}
-        <div className={styles.beach} />
-        <div className={styles.sun} />
+        {/* Autumn trees scattered in corners */}
+        {([
+          [520, 700], [950, 500], [4000, 700], [4250,1200],
+          [3600,2600], [600, 2600], [1800,2900], [2900,2800],
+        ] as [number,number][]).map(([x, y], i) => (
+          <img
+            key={`ta-${i}`}
+            src="/assets/tree-autumn.png"
+            className={styles.treeAutumn}
+            style={{ left: x, top: y }}
+            alt=""
+            draggable={false}
+          />
+        ))}
+
+        {/* Small plant pots — along paths, near buildings */}
+        {([
+          // near studio
+          [1760,1200], [2260,1200],
+          // near library
+          [3310, 920], [3760, 920],
+          // near bakery
+          [490, 2000], [940, 2000],
+          // near post office
+          [3160,2000], [3620,2000],
+          // along vertical path
+          [2220,1600], [2220,1800],
+          // along horizontal path
+          [1400,2180], [2600,2180], [3000,2180],
+          // near fountain
+          [2180,2060], [2480,2060],
+        ] as [number,number][]).map(([x, y], i) => (
+          <img
+            key={`pl-${i}`}
+            src={i % 2 === 0 ? '/assets/plants-a.png' : '/assets/plants-b.png'}
+            className={styles.plant}
+            style={{ left: x, top: y }}
+            alt=""
+            draggable={false}
+          />
+        ))}
 
         {/* Fountain */}
-        <motion.img
+        <img
           src="/assets/deco-fountain.png"
           className={styles.fountain}
           alt="Fountain"
           draggable={false}
-          whileHover={{ scale: 1.04 }}
         />
 
         {/* Bench */}
@@ -241,19 +290,6 @@ export function VaishnaviIsland({ onClose }: VaishnaviIslandProps) {
           whileHover={{ scale: 1.05 }}
         />
 
-        {/* Click label above character */}
-        <AnimatePresence>
-          {!isWaving && (
-            <motion.div
-              className={styles.characterLabel}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-            >
-              click me!
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.div>
 
       {dialogue && (
