@@ -1,22 +1,20 @@
 {
   "slug": "vaishnavi",
   "name": "Vaishnavi",
-  "avatar": "/avatars/vaishnavi.png",
   "role": "Designer",
   "type": "fairy",
   "hp": 110,
+  "avatar": "/avatars/vaishnavi.png",
   "flavor": "Makes pixels sing.",
-  "bio": "Placeholder card — Vaishnavi, edit this file to add your bio, role, likes/dislikes, and links.",
-  "likes": ["Figma", "Typography", "Well-spaced margins"],
-  "dislikes": ["Dribbble clones", "Low-contrast text"],
+  "bio": "Resident designer of this island. Moved here for the vibes, stayed for the margins. Iced drink in hand, always.",
   "stats": [
-    { "label": "Caffeine Level", "value": 60 },
-    { "label": "Deadline Resistance", "value": 80 },
-    { "label": "Prompt-Fu", "value": 70 },
-    { "label": "Stakeholder Charm", "value": 90 }
+    { "label": "Font Snobbery", "value": 95 },
+    { "label": "Iced Drink Dependency", "value": 90 },
+    { "label": "Pixel Perfectness", "value": 100 },
+    { "label": "Pinterest Scroll Resistance", "value": 15 }
   ],
-  "moves": [
-    { "name": "Grid Strike", "description": "Aligns the chaos.", "power": 80 }
-  ],
-  "links": {}
+  "likes": ["Figma", "Typography", "Well-spaced margins", "Iced drinks"],
+  "dislikes": ["Dribbble clones", "Low-contrast text", "Missing grids"],
+  "moves": [{ "name": "Grid Strike", "description": "Aligning chaos", "power": 80 }],
+  "links": { "linkedin": "https://www.linkedin.com/in/vaishnavi-jawdekar/" }
 }
