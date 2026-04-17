@@ -1,7 +1,7 @@
 .wrapper {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 200;
   background: #1a1a2e;
   overflow: hidden;
   cursor: grab;
@@ -14,6 +14,8 @@
 .canvas {
   display: block;
   image-rendering: pixelated;
+  outline: none;
+  user-select: none;
 }
 
 .hint {

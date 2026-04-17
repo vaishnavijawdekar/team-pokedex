@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameLoop } from './hooks/useGameLoop';
 import { usePlayerMovement } from './hooks/usePlayerMovement';
@@ -159,7 +160,7 @@ export function VaishnaviIsland({ onClose }: VaishnaviIslandProps) {
     return () => window.removeEventListener('resize', resize);
   }, []);
 
-  return (
+  return createPortal(
     <div className={styles.wrapper}>
       <button className={styles.closeBtn} onClick={onClose}>✕ Close</button>
 
@@ -192,6 +193,7 @@ export function VaishnaviIsland({ onClose }: VaishnaviIslandProps) {
       )}
 
       <BeachSubtitle visible={benchSubtitle} />
-    </div>
+    </div>,
+    document.body
   );
 }
