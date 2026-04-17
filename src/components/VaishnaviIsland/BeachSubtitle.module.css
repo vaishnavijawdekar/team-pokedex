@@ -1,0 +1,14 @@
+.subtitle {
+  position: fixed;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: #ffe066;
+  text-shadow: 0 0 12px rgba(255, 180, 0, 0.7), 0 2px 4px rgba(0,0,0,0.8);
+  pointer-events: none;
+  white-space: nowrap;
+}
