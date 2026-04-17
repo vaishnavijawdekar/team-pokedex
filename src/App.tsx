@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { CardGrid } from './components/CardGrid/CardGrid';
 import { Modal } from './components/Modal/Modal';
 import { CardDetail } from './components/CardDetail/CardDetail';
+import { VaishnaviIsland } from './components/VaishnaviIsland/VaishnaviIsland';
 import { findBySlug, team } from './data/loadTeam';
 
 function getSlugFromUrl(): string | null {
@@ -59,9 +60,13 @@ export default function App() {
 
       <AnimatePresence>
         {activeMember && (
-          <Modal key={activeMember.slug} onClose={handleClose}>
-            <CardDetail member={activeMember} />
-          </Modal>
+          activeMember.name.toLowerCase() === 'vaishnavi'
+            ? <VaishnaviIsland key={activeMember.slug} onClose={handleClose} />
+            : (
+              <Modal key={activeMember.slug} onClose={handleClose}>
+                <CardDetail member={activeMember} />
+              </Modal>
+            )
         )}
       </AnimatePresence>
     </div>
