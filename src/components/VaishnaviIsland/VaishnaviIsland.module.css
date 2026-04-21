@@ -4,229 +4,355 @@
   z-index: 200;
   overflow: hidden;
   cursor: grab;
-  background: #3a8f35;
+  background: radial-gradient(ellipse at center, #1A4A8A 0%, #0A2A6E 55%, #061848 100%);
 }
-
-.wrapper:active {
-  cursor: grabbing;
-}
-
-/* ─── World ─── */
+.wrapper:active { cursor: grabbing; }
 
 .world {
   position: absolute;
   top: 0;
   left: 0;
   user-select: none;
+  background-color: #0D4A9E;
+  background-image:
+    /* Shallow teal ring near island */
+    radial-gradient(ellipse 1550px 1250px at 2300px 1900px,
+      transparent 52%,
+      rgba(40,200,200,0.22) 62%,
+      rgba(20,170,190,0.18) 72%,
+      transparent 88%
+    ),
+    /* Deep water depth gradient */
+    radial-gradient(ellipse 2600px 2000px at 2300px 1900px,
+      rgba(30,100,200,0.5) 0%,
+      rgba(10,50,140,0.72) 50%,
+      rgba(4,24,80,0.92) 100%
+    ),
+    /* Whitecap shimmer */
+    repeating-linear-gradient(90deg, transparent 0px, transparent 18px, rgba(255,255,255,0.09) 18px, rgba(255,255,255,0.09) 22px),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 18px, rgba(255,255,255,0.06) 18px, rgba(255,255,255,0.06) 22px),
+    repeating-linear-gradient(45deg, transparent 0px, transparent 7px, rgba(100,200,255,0.07) 7px, rgba(100,200,255,0.07) 9px);
+  background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px, 9px 9px;
+  animation: oceanWave 5s linear infinite;
 }
 
-/* Green lego baseplate — stud grid via CSS */
+@keyframes oceanWave {
+  from { background-position: center center, center center, 0 0, 0 0, 0 0; }
+  to   { background-position: center center, center center, 22px 22px, 22px 22px, 9px 9px; }
+}
+
+/* Island landmass — irregular organic shape */
+.island {
+  position: absolute;
+  left: 900px;
+  top: 800px;
+  width: 2800px;
+  height: 2200px;
+  clip-path: polygon(
+    80px 220px, 200px 70px, 380px 20px, 600px 55px,
+    840px 8px,  1080px 48px, 1320px 12px, 1580px 45px,
+    1820px 15px, 2040px 52px, 2280px 18px, 2520px 58px,
+    2700px 140px, 2780px 350px, 2755px 620px,
+    2800px 900px, 2770px 1140px, 2795px 1400px,
+    2755px 1660px, 2788px 1920px, 2700px 2090px,
+    2480px 2175px, 2230px 2150px, 1990px 2192px,
+    1740px 2155px, 1490px 2190px, 1240px 2155px,
+    1000px 2188px, 760px 2152px, 530px 2182px,
+    300px 2150px, 120px 2170px, 18px 2000px,
+    48px 1740px, 8px 1460px, 42px 1180px,
+    10px 900px, 46px 640px, 15px 380px,
+    80px 220px
+  );
+  /* Teal shallow-water glow follows the irregular coastline */
+  filter: drop-shadow(0 0 28px rgba(40,200,200,0.65))
+          drop-shadow(0 0 75px rgba(20,160,190,0.38));
+}
+
+/* Sandy beach strips — teal→wet sand→dry sand gradient */
+.beachTop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 260px;
+  background:
+    linear-gradient(to bottom,
+      #3ECAC0 0px, #62D4C8 10px, #9ADAD2 22px,
+      #C49A3A 28px, #D4A850 65px, #E8C270 130px,
+      #F5D890 190px, #F5DEB3 230px, #EDD090 260px),
+    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 9px 9px;
+  z-index: 1;
+}
+
+.beachBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 260px;
+  background:
+    linear-gradient(to top,
+      #3ECAC0 0px, #62D4C8 10px, #9ADAD2 22px,
+      #C49A3A 28px, #D4A850 65px, #E8C270 130px,
+      #F5D890 190px, #F5DEB3 230px, #EDD090 260px),
+    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 9px 9px;
+  z-index: 1;
+}
+
+.beachLeft {
+  position: absolute;
+  top: 260px; left: 0; width: 260px; bottom: 260px;
+  background:
+    linear-gradient(to right,
+      #3ECAC0 0px, #62D4C8 10px, #9ADAD2 22px,
+      #C49A3A 28px, #D4A850 65px, #E8C270 130px,
+      #F5D890 190px, #F5DEB3 230px, #EDD090 260px),
+    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 9px 9px;
+  z-index: 1;
+}
+
+.beachRight {
+  position: absolute;
+  top: 260px; right: 0; width: 260px; bottom: 260px;
+  background:
+    linear-gradient(to left,
+      #3ECAC0 0px, #62D4C8 10px, #9ADAD2 22px,
+      #C49A3A 28px, #D4A850 65px, #E8C270 130px,
+      #F5D890 190px, #F5DEB3 230px, #EDD090 260px),
+    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 9px 9px;
+  z-index: 1;
+}
+
+/* Shore wave shimmer overlay on beach */
+.beachTop::after, .beachBottom::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 18px;
+  background: linear-gradient(to bottom, rgba(200,240,240,0.55), transparent);
+  animation: shoreWash 2.2s ease-in-out infinite;
+}
+.beachTop::after  { top: 0; }
+.beachBottom::after { bottom: 0; transform: scaleY(-1); }
+
+@keyframes shoreWash {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1.0; }
+}
+
+/* Grass ground — with subtle patch variations */
 .ground {
   position: absolute;
-  inset: 0;
-  background-color: #4db847;
-  /* Stud: a subtle raised circle per cell */
+  left: 260px; top: 260px; right: 260px; bottom: 260px;
+  background-color: #388E3C;
   background-image:
-    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.28) 32%, rgba(0,0,0,0.06) 34%, transparent 50%);
-  background-size: 24px 24px;
+    radial-gradient(ellipse 140px 90px at 18% 22%, rgba(0,0,0,0.09) 0%, transparent 100%),
+    radial-gradient(ellipse 220px 110px at 63% 13%, rgba(0,0,0,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 160px 100px at 82% 68%, rgba(0,0,0,0.07) 0%, transparent 100%),
+    radial-gradient(ellipse 110px 70px at 33% 82%, rgba(255,255,255,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 180px 120px at 55% 45%, rgba(56,142,60,0) 0%, rgba(46,125,50,0.12) 100%),
+    linear-gradient(rgba(0,0,0,0.065) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.065) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 16px 16px, 16px 16px, 64px 64px, 64px 64px;
+  z-index: 2;
 }
 
-/* Grey lego stud paths */
+/* Dirt paths */
 .pathV {
   position: absolute;
-  left: 2330px;
-  top: 0;
-  width: 192px;  /* 8 studs × 24px */
-  height: 100%;
-  background-color: #9e9e9e;
+  left: 1390px; top: 260px; width: 80px; bottom: 260px;
+  background-color: #8D6E63;
   background-image:
-    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
-  background-size: 24px 24px;
-  opacity: 0.55;
+    linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border-left: 2px solid #6D4C41;
+  border-right: 2px solid #6D4C41;
+  z-index: 3;
 }
 
 .pathH {
   position: absolute;
-  left: 0;
-  top: 2060px;
-  width: 100%;
-  height: 144px; /* 6 studs */
-  background-color: #9e9e9e;
+  left: 260px; top: 1050px; right: 260px; height: 80px;
+  background-color: #8D6E63;
   background-image:
-    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
-  background-size: 24px 24px;
-  opacity: 0.55;
+    linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border-top: 2px solid #6D4C41;
+  border-bottom: 2px solid #6D4C41;
+  z-index: 3;
 }
 
-/* Diagonal branch to library (top-right) */
-.pathBranchLibrary {
+/* Circular cobblestone plaza at path intersection */
+.fountainPlaza {
   position: absolute;
-  left: 2522px;
-  top: 780px;
-  width: 1100px;
-  height: 120px;
-  background-color: #9e9e9e;
-  background-image:
-    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
-  background-size: 24px 24px;
-  opacity: 0.45;
-  transform: rotate(-6deg);
-  transform-origin: left center;
-  border-radius: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, #D8C898 0%, #C4B07A 35%, #B09860 65%, #9C8450 100%);
+  border: 8px solid #7A6438;
+  z-index: 3;
 }
 
-/* Branch to bakery (lower-left) */
-.pathBranchBakery {
+/* Generic non-interactive decoration wrapper */
+.decoration {
   position: absolute;
-  left: 700px;
-  top: 2010px;
-  width: 1640px;
-  height: 120px;
-  background-color: #9e9e9e;
-  background-image:
-    radial-gradient(circle at 50% 42%, rgba(255,255,255,0.3) 32%, rgba(0,0,0,0.08) 34%, transparent 50%);
-  background-size: 24px 24px;
-  opacity: 0.45;
-  transform: rotate(10deg);
-  transform-origin: right center;
-  border-radius: 60px;
+  pointer-events: none;
+  z-index: 4;
 }
 
-/* ─── Buildings ─── */
-/* Zoom-out: buildings 320-380px wide instead of 420-460px */
-
-.studio {
-  position: absolute;
-  left: 1860px;
-  top: 960px;
-  width: 340px;
-  height: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.08);
-  transition: filter 0.2s;
-}
-.studio:hover {
-  filter: drop-shadow(0 20px 40px rgba(255,200,100,0.35)) brightness(1.18);
-}
-
-.library {
-  position: absolute;
-  left: 3360px;
-  top: 680px;
-  width: 370px;
-  height: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.05);
-  transition: filter 0.2s;
-}
-.library:hover {
-  filter: drop-shadow(0 20px 40px rgba(200,220,255,0.35)) brightness(1.15);
-}
-
-.bakery {
-  position: absolute;
-  left: 560px;
-  top: 1700px;
-  width: 320px;
-  height: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.05);
-  transition: filter 0.2s;
-}
-.bakery:hover {
-  filter: drop-shadow(0 20px 40px rgba(255,150,100,0.35)) brightness(1.15);
-}
-
-.postOffice {
-  position: absolute;
-  left: 3220px;
-  top: 1700px;
-  width: 340px;
-  height: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)) brightness(1.05);
-  transition: filter 0.2s;
-}
-.postOffice:hover {
-  filter: drop-shadow(0 20px 40px rgba(100,200,150,0.35)) brightness(1.15);
-}
-
-/* ─── Decorations ─── */
-
-.fountain {
-  position: absolute;
-  left: 2260px;
-  top: 1920px;
-  width: 170px;
-  height: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 10px 20px rgba(100,220,255,0.25)) brightness(1.08);
-}
-
-.bench {
-  position: absolute;
-  left: 2230px;
-  top: 310px;
-  width: 180px;
-  height: auto;
-  filter: drop-shadow(0 8px 14px rgba(0,0,0,0.4));
+/* Clickable building/object wrapper */
+.clickable {
   cursor: pointer;
+  z-index: 5;
 }
 
-/* ─── Trees (white bg: multiply, black bg: screen) ─── */
-
-.treeGreen {
-  mix-blend-mode: multiply;
-  position: absolute;
-  width: 130px;
-  height: auto;
-  pointer-events: none;
-}
-
-.treeAutumn {
-  mix-blend-mode: multiply;
-  position: absolute;
-  width: 120px;
-  height: auto;
-  pointer-events: none;
-}
-
-/* Small lego plant pots (black bg: screen) */
-.plant {
-  mix-blend-mode: screen;
-  position: absolute;
-  width: 100px;
-  height: auto;
-  pointer-events: none;
-  filter: brightness(1.1);
-}
-
-/* ─── Character (zoom-out: 160px instead of 200px) ─── */
-
+/* Vaishnavi's character — fixed position */
 .character {
   position: absolute;
-  left: 2180px;
-  top: 1380px;
-  width: 160px;
-  height: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.6)) brightness(1.15);
+  left: 1030px;
+  top: 760px;
+  cursor: pointer;
   z-index: 10;
 }
 
-/* ─── UI chrome ─── */
+/* Visitor character — world-positioned */
+.visitor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 11;
+}
 
+/* Roaming cat */
+.cat {
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+  animation: catWander 30s ease-in-out infinite;
+}
+
+@keyframes catWander {
+  0%   { transform: translate(0px,    0px); }
+  10%  { transform: translate(75px,  -55px); }
+  22%  { transform: translate(200px,  25px); }
+  35%  { transform: translate(270px, 145px); }
+  48%  { transform: translate(145px, 265px); }
+  60%  { transform: translate(15px,  340px); }
+  72%  { transform: translate(-95px, 235px); }
+  85%  { transform: translate(-140px, 90px); }
+  100% { transform: translate(0px,    0px); }
+}
+
+/* Lamp post glow state */
+.lampOn {
+  filter: drop-shadow(0 0 12px rgba(255,215,60,0.95))
+          drop-shadow(0 0 35px rgba(255,185,40,0.5));
+}
+
+/* Flower — near player becomes clickable and glows */
+.flowerNear {
+  cursor: pointer;
+  animation: flowerGlow 0.9s ease-in-out infinite alternate;
+  z-index: 6 !important;
+  pointer-events: auto !important;
+}
+
+@keyframes flowerGlow {
+  from { filter: brightness(1) drop-shadow(0 0 0px transparent); transform: scale(1); }
+  to   { filter: brightness(1.35) drop-shadow(0 0 6px rgba(255,220,80,0.9)); transform: scale(1.18); }
+}
+
+/* Crab — scuttles sideways */
+.crabActive {
+  animation: crabScuttle 0.5s steps(1, end) 3;
+  pointer-events: auto !important;
+}
+
+@keyframes crabScuttle {
+  0%   { transform: translateX(0)    scaleX(1); }
+  25%  { transform: translateX(12px) scaleX(-1); }
+  50%  { transform: translateX(24px) scaleX(1); }
+  75%  { transform: translateX(36px) scaleX(-1); }
+  100% { transform: translateX(48px) scaleX(1); }
+}
+
+/* Bouquet side panel */
+.bouquetPanel {
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.65);
+  border: 2px solid rgba(255,255,255,0.18);
+  border-radius: 18px;
+  padding: 14px 10px 10px;
+  font-family: 'Courier New', monospace;
+}
+
+.bouquetPanelIcon  { font-size: 20px; margin-bottom: 2px; }
+.bouquetPanelCount { font-size: 10px; letter-spacing: 1px; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
+
+.bouquetSlot {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px dashed rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.bouquetSlotFilled {
+  background: rgba(255,200,100,0.22);
+  border: 1px solid rgba(255,200,100,0.55);
+  transform: scale(1.08);
+}
+
+/* Post office delivery prompt */
+.deliveryPrompt {
+  position: absolute;
+  z-index: 20;
+  background: #fff8e1;
+  border: 2px solid #f48fb1;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #c2185b;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  letter-spacing: 0.5px;
+}
+
+.deliveryPrompt::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #f48fb1;
+}
+
+/* UI chrome */
 .hint {
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255,255,255,0.8);
   font-family: 'Courier New', monospace;
   font-size: 13px;
   letter-spacing: 2px;
   pointer-events: none;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
   z-index: 300;
 }
 
@@ -235,10 +361,10 @@
   top: 16px;
   right: 16px;
   z-index: 300;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.6);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 4px;
   padding: 6px 14px;
   font-size: 13px;
   font-family: 'Courier New', monospace;
@@ -246,4 +372,4 @@
   letter-spacing: 1px;
   transition: background 0.15s;
 }
-.closeBtn:hover { background: rgba(0,0,0,0.8); }
+.closeBtn:hover { background: rgba(0,0,0,0.85); }
